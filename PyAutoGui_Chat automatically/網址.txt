@@ -1,0 +1,3 @@
+https://vimsky.com/zh-tw/examples/detail/python-method-pyautogui.locateOnScreen.html
+
+https://www.itread01.com/content/1556528332.html
