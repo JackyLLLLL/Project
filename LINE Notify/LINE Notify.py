@@ -1,8 +1,9 @@
 import requests
 import json
-
+import time
+from datetime import datetime
 def get_data():
-    
+    global result
 
     url = "https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-077"
 
@@ -22,54 +23,47 @@ def get_data():
        
         location = data["records"]["locations"][0]["location"][0]["locationName"] #地區
         weather_state = data["records"]["locations"][0]["location"][0]["weatherElement"][6]["time"]
+
+        weather_state = weather_state[2]
     
-        for weather_state in weather_state:
-            
-            startTime = weather_state["startTime"]
-            endTime = weather_state["endTime"]
-            elementValue = weather_state["elementValue"]
-            value = elementValue[0]["value"]
-                 
-            print(type(startTime))
-        
-          
-  
+        dateTime = weather_state["startTime"][0:11]
+        startTime = weather_state["startTime"][11:-3]
+        endTime = weather_state["endTime"][11:16]
+        elementValue = weather_state["elementValue"]
+        value = elementValue[0]["value"]
+        value = value.split("。")
+        weather_state = value[0]
+        rain_prob = value[1][-3:]
+        temp = value[2][4:-1]
+        comfort =value[3]
+        wind = value[4]
+        humidy = value[5]
 
         
+        
+        result = (f"\n日期:{dateTime}\n時間:{startTime}~{endTime}\n狀態:{weather_state}\n降雨機率:{rain_prob}\n目前溫度:{temp}°C\n體感:{comfort}\n風向:{wind}\n{humidy}")
+        print(result)
      
-      
-        
-        #startTime =  weather_state["startTime"]
-        #endTime =
-        #elementValue =
-        #print (type(weather_state))
-        #print (weather_state)
-        #print( startTime)
-      
-       # print(startTime)
         
 
-        
-##        weather_elements = data["records"]["locations"][0]["location"][0]["weatherElement"] #天氣狀態
-##        start_time = weather_elements[0]["time"][0]["startTime"] 
-##        end_time = weather_elements[0]["time"][0]["endTime"]        
-##        weather_state = weather_elements[0]["time"][2]["elementValue"][0]
-        
-##        rain_prob = weather_elements[1]["time"][0]["parameter"]["parameterName"]
-##        min_tem = weather_elements[2]["time"][0]["parameter"]["parameterName"]
-##        comfort = weather_elements[3]["time"][0]["parameter"]["parameterName"]
-##        max_tem = weather_elements[4]["time"][0]["parameter"]["parameterName"]
-##
-##        print(location)    
-##        print(weather_elements)       
-##        print(start_time)
-##        print(weather_state)
-##        print(end_time)       
-##        print(rain_prob)
-##        print(min_tem)
-##        print(comfort)
-##        print(max_tem)
+        t = time.localtime()   
+        #ymd   = time.strftime("%Y.%m.%d",t)
+        #date  = time.strftime("%Y%m%d",t)
+        #hour  = time.strftime("%H",t)
+        current_time = str(time.strftime("%H:%M",t))
+        #sec_time = datetime.now().strftime('%H:%M:%S:%f')[:-4]
 
+        #return result
+
+
+##        for weather_state in weather_state:
+##            
+##            startTime = weather_state["startTime"]
+##            endTime = weather_state["endTime"]
+##            elementValue = weather_state["elementValue"]
+##            value = elementValue[0]["value"]
+                 
+     
     else:
         print("Can't get data!")
         
@@ -78,6 +72,7 @@ def line_notify():
     api = "CWB-3E23CE1A-37CB-4F82-8931-D3D85797A941"
     token ="QJUoBshGivcJs2cfhcopkuXhdJf6F177tLHF8hdeqFy"
     message = "Hello! 測試一下串接LINE的API!"
+    message = result
    
 
     # line notify所需資料
@@ -94,5 +89,6 @@ def line_notify():
 
 
 if __name__ == '__main__':
+
     get_data()
     #line_notify()
