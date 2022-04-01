@@ -92,30 +92,30 @@ def line_notify():
 
 
 
-set_time="16:03"
+set_time="17:30"
+
 prevent = True
 
 if __name__ == '__main__':
 
     while True:
-        
+
         t = time.localtime()
         current_time = str(time.strftime("%H:%M",t))
         print(f"目前時間:{current_time}")
 
-        i=0
 
         for i in range(24):
         
-            if current_time >= set_time and prevent == False:
-                
+            if current_time == set_time :
                 get_data(i)
+                break
 
-            prevent = False
+            
 
             print(i)
             
-        break
+    
             #sleep(5)
                
         
