@@ -74,7 +74,7 @@ def line_notify():
 
     api = "CWB-3E23CE1A-37CB-4F82-8931-D3D85797A941"
     token ="QJUoBshGivcJs2cfhcopkuXhdJf6F177tLHF8hdeqFy"
-    message = "Hello! Elsa"
+    message = result
     #message = result
    
 
@@ -92,7 +92,7 @@ def line_notify():
 
 
 
-set_time="17:30"
+set_time="15:00"
 
 prevent = True
 
@@ -102,21 +102,76 @@ if __name__ == '__main__':
 
         t = time.localtime()
         current_time = str(time.strftime("%H:%M",t))
-        print(f"目前時間:{current_time}")
+        #print(f"目前時間:{current_time}")
+
+##        for i in range(24):
+##        
+##            if current_time == "09:34" and prevent == True :
+##                get_data(0)
+##                prevent = False
+##                line_notify()
+##                break
+##            if current_time == "09:35" and prevent == False :
+##                get_data(1)
+##                prevent = True
+##                line_notify()
+##                break
+##            if current_time == "09:36" and prevent == True :
+##                get_data(2)
+##                prevent = False
+##                break
+##            if current_time == "09:37" and prevent == False :
+##                get_data(3)
+##                prevent = True
+##                break
+##            if current_time == "09:38" and prevent == True :
+##                get_data(4)
+##                prevent = False
+##                break
+##            if current_time == "09:39" and prevent == False :
+##                get_data(5)
+##                prevent = True
+##                break
 
 
+
+   
         for i in range(24):
         
-            if current_time == set_time :
-                get_data(i)
+            if current_time == "06:00" and prevent == True :
+                get_data(0)
+                line_notify()
+                prevent = False
                 break
-
+            if current_time == "09:00" and prevent == False :
+                get_data(1)
+                line_notify()
+                prevent = True
+                break
+            if current_time == "12:00" and prevent == True :
+                get_data(2)
+                line_notify()
+                prevent = False
+                break
+            if current_time == "15:00" and prevent == False :
+                get_data(3)
+                line_notify()
+                prevent = True
+                break
+            if current_time == "18:00" and prevent == True :
+                get_data(4)
+                line_notify()
+                prevent = False
+                break
+            if current_time == "21:00" and prevent == False :
+                get_data(5)
+                line_notify()
+                prevent = True
+                break
             
-
-            print(i)
-            
-    
-            #sleep(5)
+        print(f"目前時間是:{current_time},prevent={prevent}")
+           
+        sleep(50)
                
         
     #line_notify()
