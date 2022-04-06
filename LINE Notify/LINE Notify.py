@@ -138,8 +138,8 @@ if __name__ == '__main__':
    
         for i in range(24):
         
-            if current_time == "13:23" and prevent == True :
-                get_data(0)
+            if current_time == "06:00" and prevent == True :
+                get_data(1)
                 line_notify()
                 prevent = False
                 break
