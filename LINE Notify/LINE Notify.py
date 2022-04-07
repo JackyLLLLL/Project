@@ -24,9 +24,7 @@ def get_data(i):
   
        
         location = data["records"]["locations"][0]["location"][0]["locationName"] #地區
-        weather_status = data["records"]["locations"][0]["location"][0]["weatherElement"][6]["time"]
-
-        
+        weather_status = data["records"]["locations"][0]["location"][0]["weatherElement"][6]["time"]        
         
         weather_state = weather_status[i]
           
@@ -45,26 +43,6 @@ def get_data(i):
        
         result = (f"\n日期:{dateTime}\n時間:{startTime}~{endTime}\n狀態:{weather_state}\n降雨機率:{rain_prob}\n目前溫度:{temp}°C\n體感:{comfort}\n風向:{wind}\n{humidy}")
         print(result)
-
-                 
-        
-
-        #t = time.localtime()   
-        #ymd   = time.strftime("%Y.%m.%d",t)
-        #date  = time.strftime("%Y%m%d",t)
-        #hour  = time.strftime("%H",t)
-        #current_time = str(time.strftime("%H:%M",t))
-        #sec_time = datetime.now().strftime('%H:%M:%S:%f')[:-4]
-
-        #return result
-
-
-##        for weather_state in weather_state:
-##            
-##            startTime = weather_state["startTime"]
-##            endTime = weather_state["endTime"]
-##            elementValue = weather_state["elementValue"]
-##            value = elementValue[0]["value"]
                  
      
     else:
@@ -91,9 +69,6 @@ def line_notify():
     requests.post(url=line_url, headers=line_header, data=line_data)
 
 
-
-set_time="15:00"
-
 prevent = True
 
 if __name__ == '__main__':
@@ -102,44 +77,12 @@ if __name__ == '__main__':
 
         t = time.localtime()
         current_time = str(time.strftime("%H:%M",t))
-        #print(f"目前時間:{current_time}")
-
-##        for i in range(24):
-##        
-##            if current_time == "09:34" and prevent == True :
-##                get_data(0)
-##                prevent = False
-##                line_notify()
-##                break
-##            if current_time == "09:35" and prevent == False :
-##                get_data(1)
-##                prevent = True
-##                line_notify()
-##                break
-##            if current_time == "09:36" and prevent == True :
-##                get_data(2)
-##                prevent = False
-##                break
-##            if current_time == "09:37" and prevent == False :
-##                get_data(3)
-##                prevent = True
-##                break
-##            if current_time == "09:38" and prevent == True :
-##                get_data(4)
-##                prevent = False
-##                break
-##            if current_time == "09:39" and prevent == False :
-##                get_data(5)
-##                prevent = True
-##                break
-
-
 
    
         for i in range(24):
         
             if current_time == "06:00" and prevent == True :
-                get_data(1)
+                get_data(3)
                 line_notify()
                 prevent = False
                 break
