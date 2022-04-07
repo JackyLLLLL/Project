@@ -82,7 +82,7 @@ if __name__ == '__main__':
         for i in range(24):
         
             if current_time == "06:00" and prevent == True :
-                get_data(3)
+                get_data(0)
                 line_notify()
                 prevent = False
                 break
